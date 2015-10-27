@@ -48,7 +48,7 @@ public class TelaPrincipal extends JFrame {
 		menuBar.add(mnCadastros);
 		
 		JMenuItem mntmCliente = new JMenuItem("Cliente");
-		mntmCliente.addActionListener(new ActionListener() {
+		mntmCliente.addActionListener(new ActionListener() {       
 			public void actionPerformed(ActionEvent arg0) {
 				abrirTela();
 			}
