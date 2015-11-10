@@ -5,12 +5,12 @@ import java.math.BigDecimal;
 public class Produto {
 	
 	private int id;
-	private int codigodeBarra;
-	private String categoria;
-	private String descricao;
-	private int qtd;
-	private double custo;
-	private BigDecimal margemLucro;
+		private int codigodeBarra;
+		private String categoria;
+		private String descricao;
+		private int qtd;
+		private double custo;
+		private BigDecimal margemLucro;
 	
 	//Todos os get e set dos atributos acima
 	public int getId() {

@@ -20,13 +20,14 @@ import javax.swing.JTable;
 public class CadastroProduto extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
+	private JTextField txtID;
+	private JTextField txtCodigoBarra;
+	private JTextField txtUnidade;
+	private JTextField txtCusto;
+	private JTextField txtMargem;
+	private JTextField textDesc;
 	private JTable table;
+	private JTextField txtCategoria;
 
 	/**
 	 * Launch the application.
@@ -64,69 +65,69 @@ public class CadastroProduto extends JFrame {
 		lblNewLabel.setBounds(0, 52, 72, 14);
 		contentPane.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(0, 67, 54, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txtID = new JTextField();
+		txtID.setBounds(0, 67, 54, 20);
+		contentPane.add(txtID);
+		txtID.setColumns(10);
 		
 		JLabel lblCodigoDeBarra = new JLabel("Codigo de Barra");
 		lblCodigoDeBarra.setBounds(88, 52, 89, 14);
 		contentPane.add(lblCodigoDeBarra);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(88, 67, 196, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		txtCodigoBarra = new JTextField();
+		txtCodigoBarra.setBounds(88, 67, 196, 20);
+		contentPane.add(txtCodigoBarra);
+		txtCodigoBarra.setColumns(10);
 		
 		JLabel lblCategoria = new JLabel("Categoria");
 		lblCategoria.setBounds(296, 52, 72, 14);
 		contentPane.add(lblCategoria);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(294, 67, 93, 20);
-		contentPane.add(comboBox);
-		
 		JLabel lblNewLabel_1 = new JLabel("Unidade");
 		lblNewLabel_1.setBounds(0, 98, 46, 14);
 		contentPane.add(lblNewLabel_1);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(0, 111, 64, 20);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		txtUnidade = new JTextField();
+		txtUnidade.setBounds(0, 111, 64, 20);
+		contentPane.add(txtUnidade);
+		txtUnidade.setColumns(10);
 		
 		JLabel lblCusto = new JLabel("Custo");
 		lblCusto.setBounds(88, 98, 46, 14);
 		contentPane.add(lblCusto);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(88, 111, 98, 20);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
+		txtCusto = new JTextField();
+		txtCusto.setBounds(88, 111, 98, 20);
+		contentPane.add(txtCusto);
+		txtCusto.setColumns(10);
 		
 		JLabel lblMargemDeLucro = new JLabel("Margem de Lucro");
 		lblMargemDeLucro.setBounds(209, 98, 89, 14);
 		contentPane.add(lblMargemDeLucro);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(209, 111, 112, 20);
-		contentPane.add(textField_4);
-		textField_4.setColumns(10);
+		txtMargem = new JTextField();
+		txtMargem.setBounds(209, 111, 112, 20);
+		contentPane.add(txtMargem);
+		txtMargem.setColumns(10);
 		
 		JLabel lblDescrio = new JLabel("Descri\u00E7\u00E3o");
 		lblDescrio.setBounds(0, 142, 46, 14);
 		contentPane.add(lblDescrio);
 		
-		textField_5 = new JTextField();
-		textField_5.setBounds(0, 157, 387, 20);
-		contentPane.add(textField_5);
-		textField_5.setColumns(10);
+		textDesc = new JTextField();
+		textDesc.setBounds(0, 157, 387, 20);
+		contentPane.add(textDesc);
+		textDesc.setColumns(10);
 		
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.setBounds(0, 184, 72, 23);
 		contentPane.add(btnSalvar);
 		
 		JButton btnEditar = new JButton("Editar");
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnEditar.setBounds(82, 184, 72, 22);
 		contentPane.add(btnEditar);
 		
@@ -148,5 +149,10 @@ public class CadastroProduto extends JFrame {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		
+		txtCategoria = new JTextField();
+		txtCategoria.setBounds(294, 67, 86, 20);
+		contentPane.add(txtCategoria);
+		txtCategoria.setColumns(10);
 	}
 }

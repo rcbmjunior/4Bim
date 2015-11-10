@@ -7,19 +7,14 @@ import java.sql.SQLException;
 public class Conexao {
 	Connection connection;
 
-	public Conexao() throws SQLException {
-		abrirConexao();
-		fecharConexao();
 
-	}
-
-	private void fecharConexao() throws SQLException {
+	public void fecharConexao() throws SQLException {
 		connection.close();
 	}
 	//Abrir Conexão ao banco de dados
-	private void abrirConexao() {
+	public void abrirConexao() {
 		try {
-			connection = DriverManager.getConnection("jdbc:postgresql://hostname:5432/PokemonCompany", "postgres", "univel");
+			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/PokemonCompany", "postgres", "univel");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

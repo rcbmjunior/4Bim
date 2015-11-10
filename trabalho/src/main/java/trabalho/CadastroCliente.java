@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.html.HTMLEditorKit.Parser;
+
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -14,6 +16,10 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.awt.event.ActionEvent;
 
 public class CadastroCliente extends JFrame {
 
@@ -22,6 +28,12 @@ public class CadastroCliente extends JFrame {
 	private JTextField txtCidade;
 	private JTable table;
 	private JScrollPane scrollPane;
+	private JTextField txtId;
+	private JTextField txtTelefone;
+	private JTextField txtEmail;
+	private JTextField txtEnd;
+	private JComboBox cbxGenero;
+	private JComboBox cbxEstado;
 
 	/**
 	 * Launch the application.
@@ -44,7 +56,7 @@ public class CadastroCliente extends JFrame {
 	 */
 	public CadastroCliente() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 406);
+		setBounds(100, 100, 450, 473);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -63,7 +75,7 @@ public class CadastroCliente extends JFrame {
 		lblNomeCliente.setBounds(80, 45, 70, 14);
 		contentPane.add(lblNomeCliente);
 		
-		JTextField txtId = new JTextField();
+		txtId = new JTextField();
 		txtId.setBounds(0, 60, 70, 20);
 		contentPane.add(txtId);
 		txtId.setColumns(10);
@@ -93,7 +105,7 @@ public class CadastroCliente extends JFrame {
 		lblEndereo.setBounds(203, 133, 46, 20);
 		contentPane.add(lblEndereo);
 		
-		JTextField txtTelefone = new JTextField();
+		txtTelefone = new JTextField();
 		txtTelefone.setBounds(0, 105, 126, 20);
 		contentPane.add(txtTelefone);
 		txtTelefone.setColumns(10);
@@ -103,41 +115,71 @@ public class CadastroCliente extends JFrame {
 		txtCidade.setBounds(147, 102, 164, 20);
 		contentPane.add(txtCidade);
 		
-		JComboBox cbxEstado = new JComboBox();
-		cbxEstado.setBounds(321, 105, 82, 20);
-		contentPane.add(cbxEstado);
-		
-		JTextField txtEmail = new JTextField();
+		txtEmail = new JTextField();
 		txtEmail.setColumns(10);
 		txtEmail.setBounds(0, 149, 186, 20);
 		contentPane.add(txtEmail);
 		
-		JTextField txtEnd = new JTextField();
+		txtEnd = new JTextField();
 		txtEnd.setColumns(10);
 		txtEnd.setBounds(203, 149, 221, 20);
 		contentPane.add(txtEnd);
 		
 		JButton btnSalvar = new JButton("Salvar");
-		btnSalvar.setBounds(7, 180, 63, 23);
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				 inserir();
+				
+			}
+		});
+		btnSalvar.setBounds(0, 220, 63, 23);
 		contentPane.add(btnSalvar);
 		
 		JButton btnEditar = new JButton("Editar");
-		btnEditar.setBounds(80, 180, 63, 23);
+		btnEditar.setBounds(80, 220, 63, 23);
 		contentPane.add(btnEditar);
 		
 		JButton btnExcluir = new JButton("Excluir");
-		btnExcluir.setBounds(153, 180, 63, 23);
+		btnExcluir.setBounds(147, 220, 63, 23);
 		contentPane.add(btnExcluir);
 		
 		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.setBounds(221, 180, 70, 23);
+		btnBuscar.setBounds(220, 220, 70, 23);
 		contentPane.add(btnBuscar);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 214, 434, 154);
+		scrollPane.setBounds(0, 243, 434, 192);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		
+		JLabel lblGenero = new JLabel("Genero");
+		lblGenero.setBounds(0, 170, 46, 14);
+		contentPane.add(lblGenero);
+		
+		cbxGenero = new JComboBox(Genero.values());
+		cbxGenero.setBounds(0, 189, 70, 20);
+		contentPane.add(cbxGenero);
+		
+		cbxEstado = new JComboBox(Estado.values());
+		cbxEstado.setBounds(331, 105, 70, 20);
+		contentPane.add(cbxEstado);
+	}
+
+	protected void inserir() {
+		Cliente c = new Cliente();
+		ClienteDao cd = new ClienteDao();
+		c.setId(Integer.parseInt(txtId.getText()));
+		c.setNome(txtNome.getText());
+		c.setTelefone(txtTelefone.getText());
+		c.setCidade(txtCidade.getText());
+		c.setEstado((Estado)cbxEstado.getSelectedItem());
+		c.setEmail(txtEmail.getText());
+		c.setGenero((Genero)cbxGenero.getSelectedItem());
+		cd.inserir(c);
+		
+			 
+		
 	}
 }

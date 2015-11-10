@@ -9,50 +9,51 @@ public class Cliente {
 	private Estado estado;
 	private String email;
 	private Genero genero;
-
-	//Todos os get e set dos atributos acima
-	private int getId() {
+	public int getId() {
 		return id;
 	}
-	private void setId(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
-	private String getNome() {
+	public String getNome() {
 		return nome;
 	}
-	private void setNome(String nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	private String getTelefone() {
+	public String getTelefone() {
 		return telefone;
 	}
-	private void setTelefone(String telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	private String getCidade() {
+	public String getCidade() {
 		return cidade;
 	}
-	private void setCidade(String cidade) {
+	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
-	private Estado getEstado() {
+	public Estado getEstado() {
 		return estado;
 	}
-	private void setEstado(Estado estado) {
+	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
-	private String getEmail() {
+	public String getEmail() {
 		return email;
 	}
-	private void setEmail(String email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
-	private Genero getGenero() {
+	public Genero getGenero() {
 		return genero;
 	}
-	private void setGenero(Genero genero) {
+	public void setGenero(Genero genero) {
 		this.genero = genero;
 	}
+
+	//Todos os get e set dos atributos acima
+	
 	
 	
 }
