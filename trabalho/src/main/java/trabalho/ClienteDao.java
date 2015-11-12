@@ -1,18 +1,22 @@
 package trabalho;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import trabalho.Conexao;
 
 public class ClienteDao {
-	PreparedStatement ps;
 	Conexao con = new Conexao();
+	List<Cliente> clientes = new ArrayList<Cliente>();
 
 	public void inserir(Cliente cliente) {
 		try {
 			con.abrirConexao();
-			ps = con.connection.prepareStatement(
-					"INSERT INTO cliente(idCliente, nome, telefone, cidade,estado, email, genero) VALUES(?,?,?,?,?,?,?)");
+			PreparedStatement ps;
+			ps = con.connection.prepareStatement("INSERT INTO cliente(idCliente, nome, telefone, cidade,estado, email, genero) VALUES(?,?,?,?,?,?,?)");
 
 			ps.setInt(1, cliente.getId());
 			ps.setString(2, cliente.getNome());
@@ -27,7 +31,6 @@ public class ClienteDao {
 
 			System.out.println("Gravado com Sucesso");
 
-			con.fecharConexao();
 		} catch (SQLException e) {
 
 			System.out.println(e.getMessage());
@@ -35,9 +38,8 @@ public class ClienteDao {
 	}
 
 	public void deletar(Cliente cliente) throws SQLException {
-
-		ps = con.connection.prepareStatement(
-				"DELETE INTO cliente(idCliente, nome, telefone, cidade,estado, email, genero) VALUES(?,?,?,?,?,?,?)");
+		PreparedStatement ps;
+		ps = con.connection.prepareStatement("DELETE from cliente where idCliente = ?");
 
 		try {
 			ps.setInt(1, cliente.getId());
@@ -72,7 +74,10 @@ public class ClienteDao {
 	}
 
 	public void altera(Cliente cliente) throws SQLException {
-		ps = con.connection.prepareStatement("update cliente set idCliente=?, nome=?, telefone=?, cidade=?,email=?, genero=? where id=?");
+
+		PreparedStatement ps;
+		ps = con.connection.prepareStatement(
+				"update cliente set idCliente=?, nome=?, telefone=?, cidade=?,email=?, genero=? where id=?");
 		try {
 			ps.setInt(1, cliente.getId());
 			ps.setString(2, cliente.getNome());
@@ -89,4 +94,31 @@ public class ClienteDao {
 			throw new RuntimeException(e);
 		}
 	}
+
+	PreparedStatement ps;
+
+	public List<Cliente> preencher() {
+		try {
+
+			ps = con.connection.prepareStatement("SELECT idCliente, nome, telefone, cidade, estado, email, genero from cliente");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Cliente cliente = new Cliente();
+				cliente.setId(rs.getInt(1));
+				cliente.setNome(rs.getString(2));
+				cliente.setTelefone(rs.getString(3));
+				cliente.setCidade(rs.getString(4));
+				cliente.setEstado((Estado.valueOf(rs.getString(5))));
+				cliente.setEmail(rs.getString(6));
+				cliente.setGenero((Genero.valueOf(rs.getString(7))));
+
+				clientes.add(cliente);
+			}
+			ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return clientes;
+	}
+
 }
