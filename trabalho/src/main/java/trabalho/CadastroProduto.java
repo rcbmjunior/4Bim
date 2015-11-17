@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -28,7 +29,7 @@ public class CadastroProduto extends JFrame {
 	private JTextField textDesc;
 	private JTable table;
 	private JTextField txtCategoria;
-
+	private Produto p;
 	/**
 	 * Launch the application.
 	 */
@@ -120,6 +121,11 @@ public class CadastroProduto extends JFrame {
 		textDesc.setColumns(10);
 		
 		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				inserir();
+			}
+		});
 		btnSalvar.setBounds(0, 184, 72, 23);
 		contentPane.add(btnSalvar);
 		
@@ -154,5 +160,24 @@ public class CadastroProduto extends JFrame {
 		txtCategoria.setBounds(294, 67, 86, 20);
 		contentPane.add(txtCategoria);
 		txtCategoria.setColumns(10);
+	}
+
+	protected void inserir() {
+			ProdutoDao pd = new ProdutoDao();
+			p.setId(Integer.parseInt(txtID.getText()));
+			p.setCodigodeBarra(Integer.parseInt(txtCodigoBarra.getText()));
+			p.setCategoria(txtCategoria.getText());
+			p.setQtd(Integer.parseInt(txtUnidade.getText()));
+			p.setCusto(Double.parseDouble(txtCusto.getText()));
+			//p.setMargemLucro(txtMargem.getText());
+			p.setDescricao(textDesc.getText());
+	//		new ModeloCliente(pd.preencher(p));
+			//clientes = cd.preencher();
+			//table.setModel(modeloCliente);
+			//modeloCliente.fireTableDataChanged();
+			
+			
+		
+		
 	}
 }

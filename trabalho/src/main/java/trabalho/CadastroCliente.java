@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.text.html.HTMLEditorKit.Parser;
 
 import java.awt.GridLayout;
@@ -39,7 +40,7 @@ public class CadastroCliente extends JFrame {
 	private JComboBox cbxEstado;
 	private Cliente c = new Cliente();;
 	List<Cliente> clientes = new ArrayList<Cliente>();
-
+	private ModeloCliente modeloCliente;
 	/**
 	 * Launch the application.
 	 */
@@ -49,7 +50,7 @@ public class CadastroCliente extends JFrame {
 				try {
 					CadastroCliente frame = new CadastroCliente();
 					frame.setVisible(true);
-
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -199,10 +200,10 @@ public class CadastroCliente extends JFrame {
 		c.setEmail(txtEmail.getText());
 		c.setGenero((Genero) cbxGenero.getSelectedItem());
 		cd.inserir(c);
+		new ModeloCliente(cd.preencher());
 		clientes = cd.preencher();
-		ModeloCliente modeloCliente = new ModeloCliente(cd.preencher());
 		table.setModel(modeloCliente);
-		modeloCliente.fireTableDataChanged();
+		//modeloCliente.fireTableDataChanged();
 		
 		
 	}

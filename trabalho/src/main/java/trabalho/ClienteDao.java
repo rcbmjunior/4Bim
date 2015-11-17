@@ -111,7 +111,6 @@ public class ClienteDao {
 				cliente.setEstado((Estado.valueOf(rs.getString(5))));
 				cliente.setEmail(rs.getString(6));
 				cliente.setGenero((Genero.valueOf(rs.getString(7))));
-
 				clientes.add(cliente);
 			}
 			ps.close();
