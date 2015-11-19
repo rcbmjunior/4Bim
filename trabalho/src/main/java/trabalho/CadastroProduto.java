@@ -13,6 +13,8 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -29,7 +31,6 @@ public class CadastroProduto extends JFrame {
 	private JTextField textDesc;
 	private JTable table;
 	private JTextField txtCategoria;
-	private Produto p;
 	/**
 	 * Launch the application.
 	 */
@@ -163,18 +164,18 @@ public class CadastroProduto extends JFrame {
 	}
 
 	protected void inserir() {
+			Produto p = new Produto();
 			ProdutoDao pd = new ProdutoDao();
+			List<Produto> produtos = new ArrayList<Produto>();
 			p.setId(Integer.parseInt(txtID.getText()));
 			p.setCodigodeBarra(Integer.parseInt(txtCodigoBarra.getText()));
 			p.setCategoria(txtCategoria.getText());
 			p.setQtd(Integer.parseInt(txtUnidade.getText()));
 			p.setCusto(Double.parseDouble(txtCusto.getText()));
-			//p.setMargemLucro(txtMargem.getText());
+			p.setMargemLucro(new BigDecimal(txtMargem.getText()));
 			p.setDescricao(textDesc.getText());
-	//		new ModeloCliente(pd.preencher(p));
-			//clientes = cd.preencher();
-			//table.setModel(modeloCliente);
-			//modeloCliente.fireTableDataChanged();
+			pd.inserir(p);
+		//	new ProdutoDao(pd.preencher(produtos));
 			
 			
 		
